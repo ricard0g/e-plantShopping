@@ -296,6 +296,7 @@ function ProductList() {
     e.preventDefault();
     setShowCart(false);
   };
+  
   return (
     <div>
       <div className="navbar" style={styleObj}>
