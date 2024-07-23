@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./ProductList.css";
 import CartItem from "./CartItem";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addItem } from "./CartSlice";
 
 function ProductList() {
@@ -9,6 +9,7 @@ function ProductList() {
   const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
   const [addedToCart, setAddedToCart] = useState({});
   const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart.items);
 
   const plantsArray = [
     {
@@ -322,9 +323,9 @@ function ProductList() {
             </a>
           </div>
           <div>
-            {" "}
+            {}
             <a href="#" onClick={(e) => handleCartClick(e)} style={styleA}>
-              <h1 className="cart">
+              <h1 className="cart">{cart.length}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 256 256"
@@ -368,10 +369,10 @@ function ProductList() {
                     <div className="product-title">{plant.name}</div>
                     
                     <button
-                      className="product-button"
+                      className={addedToCart[plant.name] ? 'product-button added-to-cart' : 'product-button'}
                       onClick={() => handleAddToCart(plant)}
                     >
-                      Add to Cart
+                      {addedToCart[plant.name] ? 'Added to Cart' : 'Add to Cart'}
                     </button>
                   </div>
                 ))}
